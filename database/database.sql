@@ -8,3 +8,8 @@ CREATE TABLE IF NOT EXISTS usuarios (
   email VARCHAR(100) NOT NULL UNIQUE,
   fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+INSERT INTO usuarios (nombre, email) VALUES 
+('Juan Pérez', 'juan@example.com'),
+('María García', 'maria@example.com'),
+('Carlos López', 'carlos@example.com');
