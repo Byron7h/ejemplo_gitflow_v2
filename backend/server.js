@@ -28,6 +28,16 @@ app.get('/', (req, res) => {
   res.json({ message: 'API funcionando' });
 });
 
+// Endpoint para obtener usuarios
+app.get('/api/usuarios', async (req, res) => {
+  try {
+    const [rows] = await connection.execute('SELECT * FROM usuarios');
+    res.json(rows);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener usuarios' });
+  }
+});
+
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en puerto ${PORT}`);
