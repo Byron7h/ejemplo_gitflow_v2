@@ -18,8 +18,18 @@ async function conectarDB() {
   try {
     connection = await mysql.createConnection(dbConfig);
     console.log('Conectado a la base de datos MySQL');
+    
+    // Manejar desconexión
+    connection.on('error', async (err) => {
+      if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+        console.log('Reconectando a la base de datos...');
+        await conectarDB();
+      }
+    });
   } catch (error) {
     console.error('Error al conectar a la base de datos:', error);
+    // Reintentar después de 5 segundos
+    setTimeout(conectarDB, 5000);
   }
 }
 conectarDB();
