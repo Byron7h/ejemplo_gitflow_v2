@@ -35,7 +35,7 @@ async function conectarDB() {
 conectarDB();
 
 app.get('/', (req, res) => {
-  res.json({ message: 'Bienvenido al sistema de gestión de usuarios' });   // ← Cambio 2
+  res.json({ message: '¡Hola! Bienvenido a la API 🎉' });                   // ← Cambio 2
 });
 
 // Endpoint para obtener usuarios
@@ -54,9 +54,15 @@ app.get('/api/status', (req, res) => {                                     // �
 });
 
 // Configuración del puerto
+// Endpoint de versión de la API
+app.get('/api/version', (req, res) => {                                     // ← Cambio 3
+  res.json({ nombre: 'API Demo GitFlow', version: '1.0.0' });
+});
+
+// Configuración del puerto
 const PORT = 3000;
 
 app.listen(PORT, () => {
-  console.log(`Servidor iniciado en el puerto ${PORT}`);                    // ← Cambio 4
+  console.log(`🚀 Servidor listo y escuchando en el puerto ${PORT}`);
 });
 ```
