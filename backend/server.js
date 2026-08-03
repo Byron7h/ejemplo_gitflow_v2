@@ -8,7 +8,7 @@ const dbConfig = {
   host: 'localhost',
   user: 'root',
   password: 'password',
-  database: 'ejemplo_db'
+  database: 'sistema_usuarios'                                    // ← Cambio 1
 };
 
 // Conexión a la base de datos
@@ -18,7 +18,7 @@ async function conectarDB() {
   try {
     connection = await mysql.createConnection(dbConfig);
     console.log('Conectado a la base de datos MySQL');
-    
+
     // Manejar desconexión
     connection.on('error', async (err) => {
       if (err.code === 'PROTOCOL_CONNECTION_LOST') {
@@ -35,7 +35,7 @@ async function conectarDB() {
 conectarDB();
 
 app.get('/', (req, res) => {
-  res.json({ message: 'API funcionando' });
+  res.json({ message: 'Bienvenido al sistema de gestión de usuarios' });   // ← Cambio 2
 });
 
 // Endpoint para obtener usuarios
@@ -48,7 +48,15 @@ app.get('/api/usuarios', async (req, res) => {
   }
 });
 
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en puerto ${PORT}`);
+// Endpoint de estado del servidor
+app.get('/api/status', (req, res) => {                                     // ← Cambio 3
+  res.json({ estado: 'activo', version: '1.0.0' });
 });
+
+// Configuración del puerto
+const PORT = 3000;
+
+app.listen(PORT, () => {
+  console.log(`Servidor iniciado en el puerto ${PORT}`);                    // ← Cambio 4
+});
+```
